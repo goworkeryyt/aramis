@@ -1,0 +1,558 @@
+#app {
+
+  // 主体区域 Main container
+  .main-container {
+    min-height: calc(100% - 60px);
+    transition: margin-left .28s;
+    margin-left: $sideBarWidth;
+    position: relative;
+  }
+
+  // 侧边栏 Sidebar container
+  .sidebar-container {
+    transition: width 0.28s;
+    width: $sideBarWidth !important;
+    height: calc(100% - 60px);
+    position: fixed;
+    font-size: 0px;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px 0px rgba(226, 221, 219, 0.50);
+
+    //reset element-ui css
+    .horizontal-collapse-transition {
+      transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    }
+
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+      background-color: #fff !important;
+
+      .el-scrollbar__view {
+        height: calc(100% -15px);
+        margin-top: 15px;
+      }
+    }
+
+    .el-scrollbar__bar.is-vertical {
+      right: 0px;
+    }
+
+    .el-scrollbar {
+      height: calc(100% - 90px);
+    }
+
+    &.has-logo {
+      .el-scrollbar {
+        height: 100%
+      }
+    }
+
+    .is-horizontal {
+      display: none;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .svg-icon {
+      margin-right: 16px;
+    }
+
+    .el-menu {
+      border: none;
+      height: 100%;
+      width: 100% !important;
+      // box-shadow: 0 2px 4px rgba(33,43,54,.1);
+      font-family: Microsoft YaHei Regular, Microsoft YaHei Regular-Regular !important;
+    }
+
+    // 箭头颜色 方向
+    .el-submenu__icon-arrow {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      margin-top: -7px;
+      transform: rotateZ(180deg);
+      -webkit-transform: rotateZ(180deg);
+      -webkit-transition: -webkit-transform .3s;
+      transition: -webkit-transform .3s;
+      transition: transform .3s;
+      transition: transform .3s, -webkit-transform .3s;
+      font-size: 14px;
+      font-weight: bold !important;
+      color: #393E46;
+    }
+
+    .el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow {
+      -webkit-transform: rotateZ(0deg);
+      transform: rotateZ(0deg);
+    }
+
+    .child-active-bg // menu hover
+
+    .submenu-title-noDropdown,
+    .el-submenu__title {
+      //   font-weight:bold !important;
+      height: 50px !important;
+      line-height: 50px !important;
+
+      i{
+        color:$menuText!important;
+        margin-right:0px!important
+      }
+      &:hover {
+        width: $sideBarWidth !important;
+        //   background-color:transparent !important;
+        background-color: $menuChildGroupBg !important;
+        //   border-left:3px solid $subMenuActiveText!important;
+      }
+    }
+
+    .is-active>.el-submenu__title{
+      color: $subMenuActiveText !important;
+
+      i{
+          color: $subMenuActiveText !important;
+       }
+
+      .el-submenu__icon-arrow {
+        //箭头激活的颜色
+        color: $subMenuActiveText !important;
+      }
+    }
+
+    .el-menu-item.is-active {
+      color: #1292FF !important;
+      background-color: $menuChildGroupBg !important;
+      border-left: 6px solid #1292FF !important;
+    }
+
+    .menuIcon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-repeat: no-repeat;
+    }
+
+    .xitong {
+      @extend .menuIcon;
+      background: url(../images/functionIcon/xt-nor.png);
+    }
+
+    .is-active .xitong {
+      background: url(../images/functionIcon/xt-pre.png) !important;
+      @extend .menuIcon;
+    }
+
+    .xinxiguanli {
+      @extend .menuIcon;
+      background: url(../images/functionIcon/xxgl-nor.png);
+    }
+
+    .is-active .xinxiguanli {
+      background: url(../images/functionIcon/xxgl-pre.png) !important;
+      @extend .menuIcon;
+    }
+
+    .xinxitianjia {
+      @extend .menuIcon;
+      background: url(../images/functionIcon/xxtj-nor.png);
+    }
+
+    .is-active .xinxitianjia {
+      background: url(../images/functionIcon/xxtj-pre.png) !important;
+      @extend .menuIcon;
+    }
+
+
+    & .nest-menu .el-submenu>.el-submenu__title,
+    & .el-submenu .el-menu-item {
+      min-width: $sideBarWidth !important;
+
+      padding: 0px !important;
+      height: 50px !important;
+      line-height: 50px !important;
+
+      &:hover {
+        background-color: $menuChildGroupBg !important;
+        color: $subMenuActiveText !important;
+      }
+    }
+
+    & .el-submenu .el-menu-item .is-active-text {
+      font-weight: bold !important;
+    }
+  }
+
+
+  .hideSidebar {
+    .sidebar-container {
+      width: 54px !important;
+      background: #f00 !important;
+      text-align: center;
+
+      &:hover {
+        width: $sideBarWidth !important;
+        height: calc(100% - 60px);
+        float: left;
+        text-align: left;
+
+        .el-menu--collapse {
+          .el-submenu {
+            &>.el-submenu__title {
+              padding: 0px 20px !important;
+
+              &>span {
+                height: 54px;
+                overflow: visible;
+                visibility: visible;
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .main-container {
+      margin-left: 54px;
+    }
+
+    .svg-icon {
+      margin-right: 0px;
+    }
+
+    .submenu-title-noDropdown {
+      padding: 0 !important;
+      position: relative;
+
+      .el-tooltip {
+        padding: 0 !important;
+
+        .svg-icon {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    .el-submenu {
+      overflow: hidden;
+
+      &>.el-submenu__title {
+        padding: 0 !important;
+
+        .svg-icon {
+          margin-left: 20px;
+        }
+
+        .el-submenu__icon-arrow {
+          display: none;
+        }
+      }
+    }
+
+    .el-menu--collapse {
+      .el-submenu {
+        &>.el-submenu__title {
+          &>span {
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  .hoverItem {
+    .sidebar-container {
+      width: $sideBarWidth !important;
+      height: calc(100% - 60px);
+      float: left;
+      text-align: left;
+
+      .el-menu--collapse {
+        .el-submenu {
+          &>.el-submenu__title {
+            padding: 0px 20px !important;
+
+            &>span {
+              height: 54px;
+              overflow: visible;
+              visibility: visible;
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .hideSidebar .el-submenu>.el-menu .el-menu--inline {
+    &:hover+.hideSidebar .sidebar-container {
+      width: $sideBarWidth !important;
+      height: calc(100% - 60px);
+      float: left;
+      text-align: left;
+
+      .el-menu--collapse {
+        .el-submenu {
+          &>.el-submenu__title {
+            padding: 0px 20px !important;
+
+            &>span {
+              height: 54px;
+              overflow: visible;
+              visibility: visible;
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  .el-menu--collapse .el-menu .el-submenu {
+    min-width: $sideBarWidth !important;
+  }
+
+  // 适配移动端, Mobile responsive
+  .mobile {
+    .main-container {
+      margin-left: 0px;
+    }
+
+    .sidebar-container {
+      transition: transform .28s;
+      width: $sideBarWidth !important;
+    }
+
+    &.hideSidebar {
+      .sidebar-container {
+        pointer-events: none;
+        transition-duration: 0.3s;
+        transform: translate3d(-$sideBarWidth, 0, 0);
+      }
+    }
+  }
+
+  .withoutAnimation {
+
+    .main-container,
+    .sidebar-container {
+      transition: none;
+    }
+  }
+}
+
+// when menu collapsed
+.el-menu--vertical {
+  &>.el-menu {
+    .svg-icon {
+      margin-right: 16px;
+    }
+  }
+
+  .nest-menu .el-submenu>.el-submenu__title,
+  .el-menu-item {
+    padding: 0px !important;
+    font-size: 14px !important;
+
+    &:hover {
+      background-color: $menuChildGroupBg !important;
+      color: $subMenuActiveText;
+    }
+  }
+
+  // the scroll bar appears when the subMenu is too long
+  >.el-menu--popup {
+    max-height: 100vh;
+    overflow-y: auto;
+    min-width: $sideBarWidth !important;
+
+    &::-webkit-scrollbar-track-piece {
+      background: #d3dce6;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #99a9bf;
+      border-radius: 20px;
+    }
+  }
+
+  >.el-menu--popup-right-start {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+
+.el-submenu>.el-submenu__title,
+.el-submenu .el-menu-item {
+  height: 48px !important;
+  line-height: 48px !important;
+  font-size: 14px !important;
+}
+
+.el-menu-item {
+  font-size: 16px !important;
+  color: #393E46 !important;
+}
+
+
+.menu-content {
+  background: transparent;
+  /* padding: 10px 0 10px; */
+  height: 60px;
+  margin-right: 160px;
+  overflow: hidden;
+  position: fixed;
+  top: 0px;
+  left: 160px;
+  color: #666 !important;
+}
+
+.userInfo {
+  height: 48px;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 0 -10px;
+
+  .photoUrl img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+
+  .userName {
+    margin-left: 10px;
+
+    :first-child {
+      font-weight: 500;
+      color: #393E46;
+      font-size: 16px;
+    }
+
+    .positionName {
+      font-weight: 400;
+      color: #9B9E9F;
+      font-size: 12px;
+    }
+  }
+
+}
+
+.menu-content .work-radio {
+  display: flex;
+  padding-left: 60px;
+
+  .work-radio-item {
+    width: 165px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .active-bg {
+    // background-image: url(../images/work-bg@2x.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    color: #1292FF;
+  }
+}
+
+// @media screen and (min-width: 1500px) {
+//   .menu-content .el-radio-button__inner {
+//     display: inline-block;
+//     display: flex;
+//     align-items: center;
+//     height: 60px;
+//     background: transparent !important;
+//     font-weight: 600;
+//     color: #ffffff !important;
+//     padding: 8px 30px !important;
+//     border-radius: 0;
+//     border: none !important;
+//   }
+// }
+
+
+// @media screen and (max-width: 1499px) {
+
+//   .menu-content .el-radio-button__inner {
+//     display: inline-block;
+//     height: 60px;
+//     display: flex;
+//     align-items: center;
+//     background: transparent !important;
+//     font-weight: 600;
+//     color: #ffffff !important;
+//     padding: 8px 30px !important;
+//     border-radius: 0;
+//     border: none !important;
+//   }
+// }
+
+// @media screen and (max-width: 1000px) {
+
+//   .menu-content .el-radio-button__inner {
+//     display: inline-block;
+//     display: flex;
+//     align-items: center;
+//     height: 60px;
+//     background: transparent !important;
+//     font-weight: 600;
+//     color: #ffffff !important;
+//     padding: 8px 30px !important;
+//     border-radius: 0;
+//     border: none !important;
+//   }
+// }
+
+// .menu-content .el-radio-button__orig-radio:checked+.el-radio-button__inner {
+//   color: #ffffff;
+//   border: none !important;
+//   -webkit-box-shadow: -1px 0 0 0 transparent !important;
+//   box-shadow: -1px 0 0 0 transparent !important;
+// }
+
+// .menu-content .el-radio-button__orig-radio:hover+.el-radio-button__inner {
+//   color: #333333;
+//   background-color: transparent;
+//   border: none !important;
+//   -webkit-box-shadow: -1px 0 0 0 transparent !important;
+//   box-shadow: -1px 0 0 0 transparent !important;
+// }
+
+// .menu-content  .el-radio-button--medium .el-radio-button__inner {
+//     padding: 10px 20px;
+//     font-size: 14px;
+//     border-radius: 0;
+// }
+
+// .menu-content .el-radio-button:first-child .el-radio-button__inner {
+//   border: none !important;
+//   border-radius: 4px !important;
+//   -webkit-box-shadow: none !important;
+//   box-shadow: none !important;
+// }

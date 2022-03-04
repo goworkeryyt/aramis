@@ -1,0 +1,374 @@
+@import './variables.scss';
+
+@mixin colorBtn($color) {
+  background: $color;
+
+  &:hover {
+    color: $color;
+
+    &:before,
+    &:after {
+      background: $color;
+    }
+  }
+}
+
+.blue-btn {
+  @include colorBtn($blue)
+}
+
+.light-blue-btn {
+  @include colorBtn($light-blue)
+}
+
+.white-btn {
+  @include colorBtn($subMenuActiveText);
+  color: #333333 !important;
+  border: 1px solid #C9C9C9 !important;
+  border-radius: 2px !important;
+}
+
+.light-white-btn {
+  background: #2589FF !important;
+  color: #ffffff !important;
+  border: 1px solid #2589FF !important;
+}
+
+.green-white-btn {
+  background: #30B08F !important;
+  color: #ffffff !important;
+  border: 1px solid #30B08F !important;
+}
+
+.red-btn {
+  @include colorBtn($red)
+}
+
+.pink-btn {
+  @include colorBtn($pink)
+}
+
+.green-btn {
+  @include colorBtn($green)
+}
+
+.tiffany-btn {
+  @include colorBtn($tiffany)
+}
+
+.yellow-btn {
+  @include colorBtn($yellow)
+}
+
+.pan-btn {
+  font-size: 14px;
+  color: #fff;
+  padding: 10px 17px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  transition: 600ms ease all;
+  position: relative;
+  display: inline-block;
+
+  &:hover {
+    background: #fff;
+
+    &:before,
+    &:after {
+      width: 100%;
+      transition: 600ms ease all;
+    }
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    transition: 400ms ease all;
+  }
+
+  &::after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.custom-button {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #fff;
+  color: #fff;
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: 0;
+  margin: 0;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+
+// 2020.12.1
+.search,
+.search:hover,
+.search:focus {
+  min-width: 72px;
+  height: 30px;
+  background: $edit;
+  border: 1px solid $edit;
+  color: #ffffff !important;
+  border-radius: 2px;
+  padding: 8px 16px !important
+}
+
+.add,
+.add:hover,
+.add:focus {
+  min-width: 72px;
+  height: 30px;
+  background: $edit;
+  border: 1px solid $edit;
+  color: #ffffff !important;
+  border-radius: 2px;
+  padding: 8px 16px !important
+}
+
+.export,
+.export:hover,
+.export:focus {
+  min-width: 72px;
+  height: 30px;
+  background: $edit;
+  border: 1px solid $edit;
+  color: #ffffff !important;
+  border-radius: 2px;
+  padding: 8px 16px !important
+}
+
+.reset,
+.reset:hover,
+.reset:focus {
+  width: 72px;
+  height: 30px;
+  border: 1px solid $reset;
+  color: $reset;
+  background: #fff;
+  border-radius: 2px;
+  padding: 8px 16px !important
+}
+
+.cancel-btn,
+.cancel-btn:hover,
+.cancel-btn:focus {
+  min-width: 72px;
+  height: 30px;
+  border: 1px solid $edit !important;
+  color: $edit !important;
+  background: #fff !important;
+  border-radius: 2px;
+  padding: 8px 16px !important
+}
+
+.submit,
+.submit:hover,
+.submit:focus {
+  min-width: 72px;
+  height: 30px;
+  background: $edit;
+  border: 1px solid $edit;
+  border-radius: 2px;
+  padding: 8px 16px !important;
+  color: #ffffff !important;
+}
+
+.replyBtn {
+  border: none !important;
+  color: #1292FF !important;
+  background: #f2fbff !important;
+  border: 1px solid #aedaff;
+  border-radius: 2px !important;
+  padding: 10px 20px !important;
+}
+
+.replyBtn:hover {
+  background: #ccecff !important;
+  color: #075190 !important;
+  cursor: pointer;
+  border: 1px solid #ccecff;
+  border-radius: 2px;
+}
+
+.edit-btn {
+  // width: 48px;
+  // height: 34px;
+  font-size: 12px !important;
+  background: none;
+  border-radius: 2px;
+  border: none !important;
+  outline: none;
+  padding: 10px !important;
+  margin: 0 !important;
+  color: #1292FF;
+  border: 1px solid transparent !important;
+}
+
+.edit-btn:hover,
+.edit-btn:focus {
+  background: #1292FF;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn_delet {
+  width: 89px;
+  border-radius: 2px;
+  height: 30px;
+  background: #ff4849;
+  border: none;
+  color: #ffffff;
+}
+
+.delete-btn {
+  width: 48px;
+  height: 34px;
+  font-size: 14px;
+  background: none;
+  border-radius: 2px;
+  border: none !important;
+  outline: none;
+  padding: 10px !important;
+  margin: 0 !important;
+  color: $delete !important;
+  border: 1px solid transparent !important;
+}
+
+.delete-btn:hover,
+.delete-btn:focus {
+  background: $delete;
+  color: #fff !important;
+  cursor: pointer;
+}
+
+.details-btn {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #1292FF;
+  border: 1px solid #1292FF;
+  border-color: #1292FF;
+  color: #ffffff;
+  -webkit-appearance: none;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  font-weight: 400;
+  padding: 8px 16px;
+  font-size: 12px !important;
+  border-radius: 2px;
+}
+
+
+.details-btn:hover,
+.details-btn:focus {
+  border: 1px solid #1292FF;
+  color: #ffffff !important;
+  cursor: pointer;
+  background: #1292FF !important;
+}
+
+.mini {
+  width: 45px;
+  height: 30px;
+  font-size: 12px;
+  background: none;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  color: $edit;
+  padding: 8px !important;
+  text-align: center;
+  margin: 0 !important;
+}
+
+.large {
+  width: 80px !important;
+}
+
+.xxlarge {
+  width: 110px !important;
+}
+
+.default-btn {
+  min-width: 72px;
+  height: 30px;
+  border: 1px solid $edit;
+  color: $edit;
+  background: #fff;
+  border-radius: 2px;
+  padding: 8px 16px !important;
+}
+
+.default-btn:focus,
+.default-btn:hover {
+  background: #1292ff;
+  color: white;
+  border-radius: 2px;
+  padding: 8px 16px !important;
+}
+
+.edit-btn.is-disabled,
+.edit-btn.is-disabled:hover,
+.edit-btn.is-disabled:focus,
+.delete-btn.is-disabled,
+.delete-btn.is-disabled:hover,
+.delete-btn.is-disabled:focus {
+  color: #C0C4CC !important;
+  cursor: not-allowed;
+  background-image: none;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.submit.is-disabled,
+.submit.is-disabled:hover,
+.submit.is-disabled:focus {
+  color: #C0C4CC !important;
+}
+
+
+
+/*  -- 添加或上传按钮 -- */
+.addClient {
+  line-height: 34px !important;
+  padding: 0 10px !important;
+  border: 1px solid #ccecff !important;
+  background-color: #e7f4ff !important;  
+  border-radius: 4px !important;
+  color: #1292FF !important;
+
+  i {
+    font-size: 18px !important;
+  }
+
+  span {
+    margin-left: 0 !important;
+    font-size: 14px !important;
+  }
+}
+
+.addClient:hover{
+   background-color: #1292FF !important;  
+   color:#FFFFFF!important;  
+}
