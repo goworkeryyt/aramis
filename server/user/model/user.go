@@ -14,9 +14,6 @@ const (
 	// MERT 商户用户类型
 	MERT    = "MERT";
 
-	// CORP 运营单位商户类型
-	CORP    = "CORP"
-
 	// COMM 普通用户类型
 	COMM    = "COMM"
 )
