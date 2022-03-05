@@ -38,3 +38,8 @@ type Button struct {
 	/** 禁止操作 */
 	Disable               bool          `json:"disable"                    gorm:"-"`
 }
+
+// TableName 自定义表名
+func (Button) TableName() string {
+	return "sys_button"
+}
