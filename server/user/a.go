@@ -6,13 +6,13 @@
 package user
 
 import (
-	"aramis/server/user/model"
-	"aramis/server/user/model/source"
+	"github.com/goworkeryyt/aramis/server/user/model"
+	"github.com/goworkeryyt/aramis/server/user/model/source"
 	"github.com/goworkeryyt/go-core/global"
 	"go.uber.org/zap"
 )
 
-// 引入的时候自动创建表（用户表，角色表）
+// 引入的时候自动创建表
 func autoCreateTables() {
 	if global.DB != nil {
 		// 数据库自动迁移
