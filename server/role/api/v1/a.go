@@ -6,12 +6,14 @@
 package roleapi
 
 import (
-	menusrv "github.com/goworkeryyt/aramis/server/menu/service"
+	"github.com/goworkeryyt/aramis/server/menu/service"
 	"github.com/goworkeryyt/aramis/server/role/service"
 )
 
 type ApiGroup struct {
 	RoleApi
+	RoleMenuApi
+	RoleButtonApi
 }
 
 var ApiGroupApp = new(ApiGroup)
@@ -19,5 +21,4 @@ var ApiGroupApp = new(ApiGroup)
 var roleService = rolesrv.ServiceGroupApp.RoleService
 var roleMenuService = rolesrv.ServiceGroupApp.RoleMenuService
 var roleButtonService = rolesrv.ServiceGroupApp.RoleButtonService
-
 var menuService = menusrv.ServiceGroupApp.MenuService
