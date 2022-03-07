@@ -3,7 +3,7 @@
  * @Author: yt.yin
  */
 
-package request
+package usereq
 
 // UpdateUserStatusReq 更新用户状态请求参数
 type UpdateUserStatusReq struct {

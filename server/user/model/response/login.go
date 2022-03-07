@@ -5,7 +5,7 @@
 
 package response
 
-import  "aramis/server/user/model"
+import  "github.com/goworkeryyt/aramis/server/user/model"
 
 // LoginResponse 登录返回结果
 type LoginResponse struct {

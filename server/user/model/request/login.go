@@ -3,7 +3,7 @@
  * @Author: yt.yin
  */
 
-package request
+package usereq
 
 // LoginRequest 登录参数提交
 type LoginRequest struct {
