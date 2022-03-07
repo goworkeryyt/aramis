@@ -5,6 +5,8 @@
 
 package menumod
 
+import  "github.com/goworkeryyt/aramis/server/button/model"
+
 // Menu 菜单结构体
 type Menu struct {
 
@@ -43,6 +45,18 @@ type Menu struct {
 
 	/** 子菜单项 */
 	Children          []Menu           `json:"children"                   gorm:"-"`
+
+	/** 按钮列表(创建菜单时用) */
+	Buttons           []btnmod.Button  `json:"buttons"                    gorm:"-"`
+
+	/** 按钮ID */
+	ButtonId          string           `json:"buttonId"                   gorm:"-"`
+
+	/** 按钮名称 */
+	ButtonName        string           `json:"buttonName"                 gorm:"-"`
+
+	/** 按钮标识 */
+	ButtonIdentity    string           `json:"buttonIdentity"             gorm:"-"`
 }
 
 // TableName 自定义表名
