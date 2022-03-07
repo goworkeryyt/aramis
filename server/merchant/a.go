@@ -7,6 +7,7 @@ package merchant
 
 import (
 	"encoding/json"
+	"github.com/golang-module/carbon/v2"
 	"strings"
 	"sync"
 	"time"
@@ -113,26 +114,21 @@ func RouterRegister(rGroup *gin.RouterGroup) {
 	// 初始化表
 	autoCreateTables()
 	// 创建路由
+	api := mchtapi.ApiGroupApp
+	merchantGroup := rGroup.Group("merchant").Use(operate.OperateRecordHandler(carbon.DaysPerNormalYear))
 	{
-		api := mchtapi.ApiGroupApp
-		merchantGroup := rGroup.Group("merchant")
-		merchantGroup.Use(
-			operate.OperateRecordHandler(365),
-		)
-		{
-			// 创建商户
-			merchantGroup.POST("createMerchant", api.CreateMerchant)
-			// 更新商户
-			merchantGroup.POST("updateMerchant", api.UpdateMerchant)
-			// 删除商户
-			merchantGroup.POST("deleteMerchant", api.DeleteMerchant)
-		}
-		merchantGroupWithoutRecord := rGroup.Group("merchant")
-		{
-			// 查询商户（分页）
-			merchantGroupWithoutRecord.GET("getMerchantPage", api.GetMerchantPage)
-			// 查询商户（所有）
-			merchantGroupWithoutRecord.GET("getAllMerchants", api.GetAllMerchants)
-		}
+		// 创建商户
+		merchantGroup.POST("createMerchant", api.CreateMerchant)
+		// 更新商户
+		merchantGroup.POST("updateMerchant", api.UpdateMerchant)
+		// 删除商户
+		merchantGroup.POST("deleteMerchant", api.DeleteMerchant)
+	}
+	merchantGroupWithoutRecord := rGroup.Group("merchant")
+	{
+		// 查询商户（分页）
+		merchantGroupWithoutRecord.GET("getMerchantPage", api.GetMerchantPage)
+		// 查询商户（所有）
+		merchantGroupWithoutRecord.GET("getAllMerchants", api.GetAllMerchants)
 	}
 }
