@@ -5,6 +5,8 @@
 
 package mchtmod
 
+import "github.com/goworkeryyt/go-toolbox/validator"
+
 const (
 
 	// ENABLE 商户为启用状态
@@ -12,6 +14,20 @@ const (
 
 	// DISABLE 商户为停用状态
 	DISABLE = "99"
+)
+
+var (
+
+	// MerchantCreateVerify 创建商户参数效验
+	MerchantCreateVerify = validator.Rules{
+		"MerchantNo":   {validator.NotEmpty()},
+		"MerchantName": {validator.NotEmpty()},
+	}
+
+	// MerchantUpdateVerify 更新商户参数效验
+	MerchantUpdateVerify = validator.Rules{
+		"ID": {validator.NotEmpty()},
+	}
 )
 
 // Merchant 商户结构体
