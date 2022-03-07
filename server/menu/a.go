@@ -7,6 +7,7 @@ package menu
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/golang-module/carbon/v2"
 	"github.com/goworkeryyt/aramis/server/menu/api"
 	"github.com/goworkeryyt/aramis/server/menu/model"
 	"github.com/goworkeryyt/go-core/global"
@@ -31,25 +32,19 @@ func autoCreateTables() {
 func RouterRegister(rGroup *gin.RouterGroup) {
 	// 初始化表
 	autoCreateTables()
-	// 创建路由
+	menuApi := menuapi.ApiGroupApp
+	menuGroup := rGroup.Group("menu").Use(operate.OperateRecordHandler(carbon.DaysPerNormalYear))
 	{
-		menuGroup := rGroup.Group("menu")
-		menuGroup.Use(
-			operate.OperateRecordHandler(365),
-		)
-		menuApi := menuapi.ApiGroupApp.MenuApi
-		{
-			// 创建菜单
-			menuGroup.POST("createMenu", menuApi.CreateMenu)
-			// 删除菜单(单个)
-			menuGroup.POST("deleteMenu", menuApi.DeleteMenu)
-			// 更新菜单
-			menuGroup.POST("updateMenu", menuApi.UpdateMenu)
-		}
-		menuGroupWithoutRecord := rGroup.Group("menu")
-		{
-			// 查询菜单(详情)
-			menuGroupWithoutRecord.GET("findMenu", menuApi.FindMenu)
-		}
+		// 创建菜单
+		menuGroup.POST("createMenu", menuApi.CreateMenu)
+		// 删除菜单(单个)
+		menuGroup.POST("deleteMenu", menuApi.DeleteMenu)
+		// 更新菜单
+		menuGroup.POST("updateMenu", menuApi.UpdateMenu)
+	}
+	menuGroupWithoutRecord := rGroup.Group("menu")
+	{
+		// 查询菜单(详情)
+		menuGroupWithoutRecord.GET("findMenu", menuApi.FindMenu)
 	}
 }
