@@ -5,7 +5,31 @@
 
 package menumod
 
-import  "github.com/goworkeryyt/aramis/server/button/model"
+import (
+	"github.com/goworkeryyt/aramis/server/button/model"
+	"github.com/goworkeryyt/go-toolbox/validator"
+)
+
+const (
+
+	// SHOW 菜单展示
+	SHOW = 1
+
+	// HIDE 菜单隐藏
+	HIDE = -1
+)
+
+var (
+	// MenuCreateVerify 创建菜单参数效验
+	MenuCreateVerify = validator.Rules{
+		"MenuName":   {validator.NotEmpty(), validator.Le("100")},
+		"Url":        {validator.NotEmpty(), validator.Le("255")},
+		"MenuIcon":   {validator.Le("100")},
+		"RouterName": {validator.NotEmpty(), validator.Le("255")},
+		"IsShow":     {validator.NotEmpty()},
+		"FilePath":   {validator.Le("255")},
+	}
+)
 
 // Menu 菜单结构体
 type Menu struct {
