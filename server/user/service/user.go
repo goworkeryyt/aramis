@@ -7,16 +7,21 @@
 package usersrv
 
 import (
-	"aramis/server/user/model"
-	"aramis/server/user/model/request"
 	"errors"
+	"strings"
+
+	"github.com/goworkeryyt/aramis/server/merchant/model"
+	"github.com/goworkeryyt/aramis/server/role/model"
+	"github.com/goworkeryyt/aramis/server/user/model"
+	"github.com/goworkeryyt/aramis/server/user/model/request"
+	"github.com/goworkeryyt/go-core/db"
 	"github.com/goworkeryyt/go-core/global"
 	"github.com/goworkeryyt/go-toolbox/array"
+	"github.com/goworkeryyt/go-toolbox/page"
 	"github.com/goworkeryyt/go-toolbox/sign"
 	"github.com/goworkeryyt/go-toolbox/uuid"
 	"github.com/jinzhu/copier"
 	"gorm.io/gorm"
-	"strings"
 )
 
 type UserService struct{}
@@ -68,7 +73,7 @@ func (userService *UserService) ChangePassword(u *usermod.User, newPassword stri
 func (userService *UserService) GetUserInfo(id string) (user usermod.User, err error) {
 	err = global.DB.First(&user, "id = ?", id).Error
 	// 为用户关联角色
-	userRoleIds, _ := userRoleService.GetUserRoles(user.ID)
+	userRoleIds, _ := ServiceGroupApp.UserRoleService.GetUserRoles(user.ID)
 	roles, errRole := roleService.FindRoleByIds(userRoleIds)
 	if errRole != nil {
 		return user, errors.New("用户级联角色失败")
@@ -84,7 +89,7 @@ func (userService *UserService) GetUserInfo(id string) (user usermod.User, err e
  *  @param user
  *  @return err
  */
-func (userService *UserService) CreateUser(user request.CreateUserRequest) (err error) {
+func (userService *UserService) CreateUser(user usereq.CreateUserRequest) (err error) {
 	// 开启数据库事务,使用defer，recover监听事务结束关闭事务
 	tx := global.DB.Begin()
 	defer func() {
@@ -114,7 +119,7 @@ func (userService *UserService) CreateUser(user request.CreateUserRequest) (err 
 	if user.UserType == usermod.ADMI {
 		// 超级管理员
 	} else if user.UserType == usermod.MERT {
-		var merchant usermod.MerchantInfo
+		var merchant mchtmod.Merchant
 		err = tx.Where("merchant_no = ?", user.MerchantNo).Where("status = ?", usermod.ENABLE).First(&merchant).Error
 		if err != nil || strings.TrimSpace(merchant.ID) == "" {
 			tx.Rollback()
@@ -136,7 +141,7 @@ func (userService *UserService) CreateUser(user request.CreateUserRequest) (err 
 
 	if len(user.RoleIds) > 0 {
 		// 效验角色
-		var roles []usermod.Role
+		var roles []rolemod.Role
 		err = tx.Where("id in ?", user.RoleIds).Find(&roles).Error
 		if err != nil {
 			tx.Rollback()
@@ -148,10 +153,13 @@ func (userService *UserService) CreateUser(user request.CreateUserRequest) (err 
 		}
 
 		// 为用户批量添加角色
-		_, err = global.Enforcer.AddRolesForUser("user-"+userNew.ID, user.RoleIds)
-		if err != nil {
-			tx.Rollback()
-			return errors.New("为用户添加角色失败")
+		for i := range user.RoleIds {
+			roleId := user.RoleIds[i]
+			_, err = global.CSBEF.AddRoleForUser("user-"+userNew.ID, roleId)
+			if err != nil {
+				tx.Rollback()
+				return errors.New("为用户添加角色失败")
+			}
 		}
 	}
 
@@ -175,7 +183,7 @@ func (userService *UserService) GetUserPage(pageInfo *page.PageInfo) (err error,
 	// 为用户关联角色
 	for i, _ := range rows {
 		user := *rows[i]
-		userRoleIds, _ := userRoleService.GetUserRoles(user.ID)
+		userRoleIds, _ := ServiceGroupApp.UserRoleService.GetUserRoles(user.ID)
 		roles, errRole := roleService.FindRoleByIds(userRoleIds)
 		if errRole != nil {
 			return errors.New("级联用户角色失败"), nil
@@ -207,12 +215,12 @@ func (userService *UserService) DeleteUser(id string) (err error) {
 	}
 
 	if user.LoginCount <= 0 {
-		roles, err := userRoleService.GetUserRoles(id)
+		roles, err := ServiceGroupApp.GetUserRoles(id)
 		if err != nil {
 			return errors.New("查询用户角色失败")
 		}
 		if roles != nil {
-			err = userRoleService.UpdateUserRoles(id, nil)
+			err = ServiceGroupApp.UserRoleService.UpdateUserRoles(id, nil)
 			if err != nil {
 				return errors.New("解绑用户角色失败")
 			}
@@ -226,7 +234,7 @@ func (userService *UserService) DeleteUser(id string) (err error) {
 	}
 
 	// 绑定过角色的用户无法删除
-	userRoleIds, _ := userRoleService.GetUserRoles(user.ID)
+	userRoleIds, _ := ServiceGroupApp.UserRoleService.GetUserRoles(user.ID)
 	if len(userRoleIds) > 0 {
 		return errors.New("被角色绑定的用户无法删除")
 	}
@@ -263,15 +271,14 @@ func (userService *UserService) UpdateUserStatus(userId, status string) (err err
 	// 若商户存在则判定商户类型
 	if user.MerchantNo != "" {
 		// 查询用户所在商户状态
-		var merchant usermod.MerchantInfo
+		var merchant mchtmod.Merchant
 		err = global.DB.Where("merchant_no = ?", user.MerchantNo).First(&merchant).Error
 		if err != nil {
-			return errors.New("您所在的商户异常")
+			return errors.New("商户不存在")
 		}
-
 		// 停用的商户不能修改用户状态
-		if merchant.Status == usermod.MERCHANT_DISABLE {
-			return errors.New("您所在的商户已停用，无法修改用户状态")
+		if merchant.Status == mchtmod.DISABLE {
+			return errors.New("商户已停用，无法修改用户状态")
 		}
 	}
 
@@ -311,7 +318,7 @@ func (userService *UserService) UpdateUserRoles(userId string, roleIds []string)
 		return errors.New("该用户不存在")
 	}
 
-	var roles []usermod.Role
+	var roles []rolemod.Role
 	err = global.DB.Where("id in ?", roleIds).Find(&roles).Error
 	if err != nil {
 		return errors.New("查询绑定的角色异常")
@@ -321,7 +328,7 @@ func (userService *UserService) UpdateUserRoles(userId string, roleIds []string)
 	}
 
 	// 更新用户角色
-	err = userRoleService.UpdateUserRoles(user.ID, roleIds)
+	err = ServiceGroupApp.UserRoleService.UpdateUserRoles(user.ID, roleIds)
 	if err != nil {
 		return errors.New("绑定部分角色失败")
 	}
@@ -335,7 +342,7 @@ func (userService *UserService) UpdateUserRoles(userId string, roleIds []string)
  *  @param user
  *  @return err
  */
-func (userService *UserService) UpdateUser(user userreq.UpdateUserRequest) (err error) {
+func (userService *UserService) UpdateUser(user usereq.UpdateUserRequest) (err error) {
 	// 开启数据库事务,使用defer，recover监听事务结束关闭事务
 	tx := global.DB.Begin()
 	defer func() {
@@ -367,14 +374,14 @@ func (userService *UserService) UpdateUser(user userreq.UpdateUserRequest) (err 
 	}
 
 	if len(user.RoleIds) > 0 {
-		var roles []usermod.Role
+		var roles []rolemod.Role
 		err = tx.Where("id in ?", user.RoleIds).Find(&roles).Error
 		if len(roles) != len(user.RoleIds) {
 			tx.Rollback()
 			return errors.New("存在非法的角色ID")
 		}
 		// 更新用户角色
-		err = userRoleService.UpdateUserRoles(userNow.ID, user.RoleIds)
+		err = ServiceGroupApp.UserRoleService.UpdateUserRoles(userNow.ID, user.RoleIds)
 		if err != nil {
 			tx.Rollback()
 			return errors.New("更新用户角色失败")

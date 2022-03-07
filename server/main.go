@@ -2,8 +2,11 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/goworkeryyt/aramis/server/menu"
+	"github.com/goworkeryyt/aramis/server/merchant"
 	"github.com/goworkeryyt/go-config"
 	"github.com/goworkeryyt/go-config/env"
+	"github.com/goworkeryyt/go-core/casbin"
 	"github.com/goworkeryyt/go-core/db"
 	"github.com/goworkeryyt/go-core/global"
 	"github.com/goworkeryyt/go-core/srun"
@@ -32,12 +35,19 @@ func main() {
 	// 获取配置文件原始内容,这样方便在程序中全局拿到自己定义的配置子项
 	global.VP = global.CONFIG.Viper
 
+	// 初始化 casbin 执行者
+	global.CSBEF = casbin.Casbin()
+
 	// 启动 http 服务
 	r := gin.Default()
 	// 健康监测
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, "ok")
 	})
+
+	group := r.Group("aramis")
+	menu.RouterRegister(group)
+	merchant.RouterRegister(group)
 	// 启动服务
 	srun.RunHttpServer(r)
 }

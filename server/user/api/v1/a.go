@@ -12,11 +12,12 @@ import (
 
 type ApiGroup struct {
 	UserApi
+	LoginApi
 }
 
 var ApiGroupApp = new(ApiGroup)
 
 var userService = usersrv.ServiceGroupApp.UserService
+var roleService = rolesrv.ServiceGroupApp.RoleService
 var userRoleService = usersrv.ServiceGroupApp.UserRoleService
 
-var roleService = rolesrv.ServiceGroupApp.RoleService
