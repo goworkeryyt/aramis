@@ -5,6 +5,16 @@
 
 package rolemod
 
+import "github.com/goworkeryyt/go-toolbox/validator"
+
+var (
+	// RoleVerify 创建角色效验
+	RoleVerify = validator.Rules{
+		"RoleName": {validator.NotEmpty(), validator.Le("32")}, // 角色名称
+		"Remake":   {validator.Le("255")},                      // 角色描述
+	}
+)
+
 // Role 角色结构体
 type Role struct {
 
