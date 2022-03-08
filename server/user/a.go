@@ -7,6 +7,7 @@ package user
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/golang-module/carbon/v2"
 	"github.com/goworkeryyt/aramis/server/user/api/v1"
 	"github.com/goworkeryyt/aramis/server/user/model"
 	"github.com/goworkeryyt/go-core/global"
@@ -33,13 +34,13 @@ func RouterRegister(rGroup *gin.RouterGroup) {
 	autoCreateTables()
 	api := userapi.ApiGroupApp
 	// 带访问记录的api组
-	userAccessGroup := rGroup.Group("user").Use(access.AccessRecordHandler(90))
+	userAccessGroup := rGroup.Group("user").Use(access.AccessRecordHandler(carbon.DaysPerNormalYear))
 	{
 		// 用户登录
 		userAccessGroup.POST("login", api.Login)
 	}
 	// 带操作记录的api组
-	userGroup := rGroup.Group("user").Use(operate.OperateRecordHandler(365))
+	userGroup := rGroup.Group("user").Use(operate.OperateRecordHandler(carbon.DaysPerNormalYear))
 	{
 		// 修改密码
 		userGroup.POST("changePassword", api.ChangePassword)

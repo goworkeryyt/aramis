@@ -7,6 +7,7 @@ package data
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/golang-module/carbon/v2"
 	"github.com/goworkeryyt/aramis/server/data/api/v1"
 	"github.com/goworkeryyt/aramis/server/data/model"
 	"github.com/goworkeryyt/go-core/global"
@@ -33,7 +34,7 @@ func RouterRegister(rGroup *gin.RouterGroup) {
 	autoCreateTables()
 	api := datapi.ApiGroupApp
 	// 创建路由
-	apiGroup := rGroup.Group("data_api").Use(operate.OperateRecordHandler(365))
+	apiGroup := rGroup.Group("data_api").Use(operate.OperateRecordHandler(carbon.DaysPerNormalYear))
 	{
 		// 创建API
 		apiGroup.POST("createApi", api.CreateApi)
