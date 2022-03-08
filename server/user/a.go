@@ -9,7 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/goworkeryyt/aramis/server/user/api/v1"
 	"github.com/goworkeryyt/aramis/server/user/model"
-	"github.com/goworkeryyt/aramis/server/user/model/source"
 	"github.com/goworkeryyt/go-core/global"
 	"github.com/goworkeryyt/go-middle/record/access"
 	"github.com/goworkeryyt/go-middle/record/operate"
@@ -25,11 +24,6 @@ func autoCreateTables() {
 		)
 		if err != nil && global.LOG != nil {
 			global.LOG.Error("初始化表时异常：", zap.Any("err", err))
-		}
-		// 初始化数据
-		err = source.Admin.Init()
-		if err != nil {
-			global.LOG.Error("初始化数据异常：", zap.Any("err", err))
 		}
 	}
 }
