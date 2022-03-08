@@ -8,7 +8,7 @@ package menu
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-module/carbon/v2"
-	btnmod "github.com/goworkeryyt/aramis/server/button/model"
+	"github.com/goworkeryyt/aramis/server/button/model"
 	"github.com/goworkeryyt/aramis/server/menu/api"
 	"github.com/goworkeryyt/aramis/server/menu/model"
 	"github.com/goworkeryyt/go-core/global"
