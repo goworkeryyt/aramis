@@ -147,7 +147,9 @@ func (merchantAPI *MerchantApi) GetAllMerchants(c *gin.Context) {
 		result.FailMsg("解析token失败", c)
 		return
 	}
-	if claims.UserType == usermod.MERT {
+	if claims.UserType == usermod.ADMI {
+		// 管理员可以查询所有商户
+	} else if claims.UserType == usermod.MERT {
 		merchant, err := merchantService.FindMerchantByMerchantNo(claims.MerchantNo)
 		if err != nil {
 			result.FailMsg(claims.MerchantNo+"商户异常", c)
@@ -158,7 +160,6 @@ func (merchantAPI *MerchantApi) GetAllMerchants(c *gin.Context) {
 		result.FailMsg("您的身份无权查询商户", c)
 		return
 	}
-
 	if menuInfos, err := merchantService.GetAllMerchants(parentId); err != nil {
 		global.LOG.Error("查询失败:", zap.Any("err", err))
 		result.FailMsg("查询失败:"+err.Error(), c)
