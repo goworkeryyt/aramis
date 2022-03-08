@@ -14,6 +14,7 @@ import (
 	"github.com/goworkeryyt/aramis/server/source"
 	"github.com/goworkeryyt/aramis/server/user"
 	"github.com/goworkeryyt/go-core/global"
+	"github.com/goworkeryyt/go-middle/record"
 	"go.uber.org/zap"
 )
 
@@ -55,10 +56,18 @@ func dbInit(){
 
 // RouterRegister 注册阿拉姆斯所有路由
 func RouterRegister(rGroup *gin.RouterGroup) {
+	// 菜单
 	menu.RouterRegister(rGroup)
+	// 数据api
 	data.RouterRegister(rGroup)
+	// 角色
 	role.RouterRegister(rGroup)
+	// 用户账号
 	user.RouterRegister(rGroup)
+	// 商户
 	merchant.RouterRegister(rGroup)
+	// 访问记录
+	record.RouterRegister(rGroup)
+	// 初始化数据
 	dbInit()
 }
