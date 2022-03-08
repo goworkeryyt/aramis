@@ -2,8 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/goworkeryyt/aramis/server/menu"
-	"github.com/goworkeryyt/aramis/server/merchant"
+	"github.com/goworkeryyt/aramis/server/aramis"
 	"github.com/goworkeryyt/go-config"
 	"github.com/goworkeryyt/go-config/env"
 	"github.com/goworkeryyt/go-core/casbin"
@@ -11,6 +10,7 @@ import (
 	"github.com/goworkeryyt/go-core/global"
 	"github.com/goworkeryyt/go-core/srun"
 	"github.com/goworkeryyt/go-core/zap"
+	"github.com/goworkeryyt/go-middle/recovery"
 )
 
 //go:generate go env -w GO111MODULE=on
@@ -40,14 +40,13 @@ func main() {
 
 	// 启动 http 服务
 	r := gin.Default()
+	r.Use(recovery.GinRecovery(true))
 	// 健康监测
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, "ok")
 	})
-
 	group := r.Group("aramis")
-	menu.RouterRegister(group)
-	merchant.RouterRegister(group)
+	aramis.RouterRegister(group)
 	// 启动服务
 	srun.RunHttpServer(r)
 }
