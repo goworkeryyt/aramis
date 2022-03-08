@@ -80,20 +80,6 @@ const routerArray = [
     ]
   },
   {
-    path: '/corp',
-    component: Layout,
-    redirect: 'corp',
-    name: '运营单位管理',
-    children: [
-      {
-        path: 'corpList',
-        component: () => import('@/views/corp/corpList'),
-        name: 'corpList',
-        meta: { title: '运营单位信息', noTag: false }
-      }
-    ]
-  },
-  {
     path: '/merchant',
     component: Layout,
     redirect: 'merchant',
@@ -104,26 +90,6 @@ const routerArray = [
         component: () => import('@/views/merchant/merchantList'),
         name: 'merchantList',
         meta: { title: '商户信息', noTag: false }
-      }
-    ]
-  },
-  {
-    path: '/record',
-    component: Layout,
-    redirect: 'record',
-    name: '交易记录',
-    children: [
-      {
-        path: 'cardRcdList',
-        component: () => import('@/views/record/cardRcdList'),
-        name: 'cardRcdList',
-        meta: { title: '卡交易记录', noTag: false }
-      },
-      {
-        path: 'filePackRcdList',
-        component: () => import('@/views/record/filePackRcdList'),
-        name: 'filePackRcdList',
-        meta: { title: '组包记录', noTag: false }
       }
     ]
   },

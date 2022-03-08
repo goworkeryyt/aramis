@@ -163,7 +163,7 @@ export default {
       this.$store.dispatch('router/getSelfMenuTree')
       this.$store.dispatch('user/getSelfButtons')
 
-      this.$router.push('/record/cardRcdList')
+      this.$router.push('/home/dashboard')
 
       // 根据角色权限存储商户、运营单位、线路信息
       if (content.user.userType == 'ADMI') {

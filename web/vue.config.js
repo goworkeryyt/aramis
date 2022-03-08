@@ -6,7 +6,7 @@ const port = 9527;
 
 // 访问域名
 // const serviceUrl_1 = 'http://127.0.0.1:8081';  // 打包
-const serviceUrl_1 = "http://192.168.10.20:8081"; // 开发
+const serviceUrl_1 = "http://192.168.12.121:9999"; // 开发
 
 // const serviceUrl_2 = 'http://127.0.0.1:8081';  // 打包
 const serviceUrl_2 = "http://192.168.12.131:8889"; // 开发
@@ -31,15 +31,8 @@ module.exports = {
       errors: true
     },
     proxy: {
-        [process.env.VUE_APP_LAN]: {
-            target: serviceUrl_1 + "/app/",
-            changeOrigin: true,
-            pathRewrite: {
-              ["^" + process.env.VUE_APP_LAN]: ""
-            }
-        },
         [process.env.VUE_APP_AUTH]: {
-            target: serviceUrl_2 + "/sys_auth/",
+            target: serviceUrl_1 + "/aramis/",
             changeOrigin: true,
             pathRewrite: {
             ["^" + process.env.VUE_APP_AUTH]: ""
