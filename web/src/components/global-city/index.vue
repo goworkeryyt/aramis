@@ -56,7 +56,7 @@ import areaData from './area'
 export default {
   name: 'EbringCity',
   props: {
-    size: ,
+    size:'' ,
     disabled: {
       size: String,
       type: Boolean,
