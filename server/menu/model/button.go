@@ -3,7 +3,7 @@
  * @Author: yt.yin
  */
 
-package btnmod
+package menumod
 
 // Button 按钮结构体
 type Button struct {

@@ -10,6 +10,8 @@ import (
 	"github.com/goworkeryyt/go-core/global"
 	"github.com/goworkeryyt/go-core/srun"
 	"github.com/goworkeryyt/go-core/zap"
+	"github.com/goworkeryyt/go-middle/cors"
+	"github.com/goworkeryyt/go-middle/jwt"
 	"github.com/goworkeryyt/go-middle/recovery"
 )
 
@@ -38,9 +40,12 @@ func main() {
 	// 初始化 casbin 执行者
 	global.CSBEF = casbin.Casbin()
 
-	// 启动 http 服务
+	// 初始化gin
 	r := gin.Default()
 	r.Use(recovery.GinRecovery(true))
+	r.Use(cors.Cors())
+	r.Use(jwt.JWTAuth())
+	r.Use(casbin.CasbinHandler())
 	// 健康监测
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, "ok")

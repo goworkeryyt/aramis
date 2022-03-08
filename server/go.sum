@@ -396,8 +396,8 @@ github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/ad
 github.com/goworkeryyt/go-config v0.0.0-20220228091301-316c2934c5ba h1:eAw+QSzrS6H/5WkFlus/F/e1f/0aPxfOdPzUBbk4OpI=
 github.com/goworkeryyt/go-config v0.0.0-20220228091301-316c2934c5ba/go.mod h1:ZEWQUsUGAIFx/OTq17+1FA2DFiJw1MBnBTEmXwk/dck=
 github.com/goworkeryyt/go-core v0.0.0-20220307062736-1c66be52f3b8/go.mod h1:afdHuq5X9aPj7MwbUpVzqdYEhMB7O+KN9Ds/TRudKPY=
-github.com/goworkeryyt/go-core v0.0.0-20220307124847-dff1201cc7b7 h1:AzHve33Qp/TO/pB44Pl0b9XOdkeIEywGTsexdL9W8iw=
-github.com/goworkeryyt/go-core v0.0.0-20220307124847-dff1201cc7b7/go.mod h1:afdHuq5X9aPj7MwbUpVzqdYEhMB7O+KN9Ds/TRudKPY=
+github.com/goworkeryyt/go-core v0.0.0-20220308064054-897acfa87a59 h1:W0fwJdsqI80bNsCmt30ED1abB95tpDUfhslATLT2I1s=
+github.com/goworkeryyt/go-core v0.0.0-20220308064054-897acfa87a59/go.mod h1:Ug18KlpLZVTK/dZh4mAQOwIzEJTRkieeYsDTAgF2Avo=
 github.com/goworkeryyt/go-middle v0.0.0-20220307121946-9d9c072cf7a5 h1:CszpBfYnJU7i8wySS8NOOWOwHh/Gx5Tcx6E3D9mrAuo=
 github.com/goworkeryyt/go-middle v0.0.0-20220307121946-9d9c072cf7a5/go.mod h1:Rl5suVzkqwLQb2NuOR6RExjyjoKedqZqy6ua0o1LmMo=
 github.com/goworkeryyt/go-toolbox v0.0.0-20220305033707-dab25998ab55/go.mod h1:wUEoKE6INSpeCsp9KjcBV3YU2azFYqB4NWFeBgPcylI=

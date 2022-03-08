@@ -7,14 +7,13 @@ package rolesrv
 
 import (
 	"errors"
+	"github.com/goworkeryyt/aramis/server/menu/model"
 	"strings"
 
-	"github.com/goworkeryyt/aramis/server/button/model"
 	"github.com/goworkeryyt/aramis/server/role/model"
 	"github.com/goworkeryyt/go-core/global"
 	"github.com/goworkeryyt/go-toolbox/array"
 	"go.uber.org/zap"
-
 )
 
 type RoleButtonService struct{}
@@ -40,7 +39,7 @@ func (roleButtonService *RoleButtonService) UpdateRoleButton(roleId string, butt
 	}
 
 	// 查询按钮是否存在
-	var buttons []btnmod.Button
+	var buttons []menumod.Button
 	err = global.DB.Where("id in ?", buttonIds).Find(&buttons).Error
 	if err != nil {
 		global.LOG.Error("查询按钮失败:", zap.Any("err:", err))
@@ -101,7 +100,7 @@ func (roleButtonService *RoleButtonService) GetRoleButtons(roleIds []string, url
 		buttonIds = append(buttonIds, button.ButtonId)
 	}
 
-	var buttons []btnmod.Button
+	var buttons []menumod.Button
 	if strings.TrimSpace(url) != "" {
 		err = global.DB.Where("id in ?", buttonIds).Where("page_path = ?", url).Find(&buttons).Error
 	} else {
@@ -127,7 +126,7 @@ func (roleButtonService *RoleButtonService) GetRoleButtons(roleIds []string, url
  *  @return err
  */
 func (roleButtonService *RoleButtonService) GetAllButtons(url string) (buttonFullIdentity map[string]string, err error) {
-	var buttons []btnmod.Button
+	var buttons []menumod.Button
 	if strings.TrimSpace(url) != "" {
 		err = global.DB.Where("page_path = ?", url).Find(&buttons).Error
 	} else {

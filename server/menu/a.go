@@ -8,7 +8,6 @@ package menu
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-module/carbon/v2"
-	"github.com/goworkeryyt/aramis/server/button/model"
 	"github.com/goworkeryyt/aramis/server/menu/api"
 	"github.com/goworkeryyt/aramis/server/menu/model"
 	"github.com/goworkeryyt/go-core/global"
@@ -22,7 +21,7 @@ func autoCreateTables() {
 		// 数据库自动迁移
 		err := global.DB.AutoMigrate(
 			menumod.Menu{},
-			btnmod.Button{},
+			menumod.Button{},
 		)
 		if err != nil && global.LOG != nil {
 			global.LOG.Error("初始化表时异常：", zap.Any("err", err))

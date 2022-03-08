@@ -8,7 +8,7 @@ package source
 import (
 	"github.com/golang-module/carbon/v2"
 	"github.com/gookit/color"
-	"github.com/goworkeryyt/aramis/server/button/model"
+	"github.com/goworkeryyt/aramis/server/menu/model"
 	"github.com/goworkeryyt/go-core/global"
 	"gorm.io/gorm"
 )
@@ -17,7 +17,7 @@ var Button = new(button)
 
 type button struct{}
 
-var buttons = []btnmod.Button{
+var buttons = []menumod.Button{
 	{ID: "061dc231534643c785790dcf306f4adf", CreateTime: carbon.Now().ToDateTimeString(), ButtonName: "删除", ButtonIdentity: "delete", ButtonFullIdentity: "merchant:merchantList:delete", PageName: "商户管理", PagePath: "merchant/merchantList", MenuId: "651515f100e34fbc805fa2d7019bc335"},
 	{ID: "331659be5b9c4d3f8185ba2a3c9083ab", CreateTime: carbon.Now().ToDateTimeString(), ButtonName: "编辑", ButtonIdentity: "edit", ButtonFullIdentity: "merchant:merchantList:edit", PageName: "商户管理", PagePath: "merchant/merchantList", MenuId: "651515f100e34fbc805fa2d7019bc335"},
 	{ID: "40903ed28232423d99875e330b1c5f56", CreateTime: carbon.Now().ToDateTimeString(), ButtonName: "编辑", ButtonIdentity: "edit", ButtonFullIdentity: "superAdmin:user:edit", PageName: "用户管理", PagePath: "superAdmin/user", MenuId: "5123afd2a3ac489f95fbc4b7865ba3d3"},
@@ -51,7 +51,7 @@ var buttons = []btnmod.Button{
  */
 func (b *button) Init() error {
 	return global.DB.Transaction(func(tx *gorm.DB) error {
-		if tx.Where("page_name IN ?", []string{"商户管理","用户管理","访问历史","菜单管理","角色管理","操作历史","api管理"}).Find(&[]btnmod.Button{}).RowsAffected > 0 {
+		if tx.Where("page_name IN ?", []string{"商户管理","用户管理","访问历史","菜单管理","角色管理","操作历史","api管理"}).Find(&[]menumod.Button{}).RowsAffected > 0 {
 			color.Danger.Println("sys_button 表的初始数据已存在!")
 			return nil
 		}

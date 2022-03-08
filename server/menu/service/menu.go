@@ -9,7 +9,6 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/goworkeryyt/aramis/server/button/model"
 	"github.com/goworkeryyt/aramis/server/menu/model"
 	"github.com/goworkeryyt/aramis/server/role/model"
 	"github.com/goworkeryyt/go-core/db"
@@ -98,7 +97,7 @@ func (menuService *MenuService) CreateMenu(menu menumod.Menu) (err error) {
 	// 有按钮才创建
 	if len(menu.Buttons) > 0 {
 		// 遍历得到需要创建的按钮
-		var buttonCreates []btnmod.Button
+		var buttonCreates []menumod.Button
 		for _, button := range menu.Buttons {
 			button.ID = uuid.UUID()
 			button.MenuId = menu.ID
@@ -256,7 +255,7 @@ func (menuService *MenuService) UpdateMenu(menu menumod.Menu) (err error) {
 		return errors.New("按钮标识不唯一")
 	}
 
-	var CreateButtons []btnmod.Button
+	var CreateButtons []menumod.Button
 	url, err := menuService.GetMenuPath(tx, menu.ID)
 	if err != nil {
 		return errors.New("解析URL失败")
@@ -270,7 +269,7 @@ func (menuService *MenuService) UpdateMenu(menu menumod.Menu) (err error) {
 	}
 
 	// 删除原有的按钮
-	err = tx.Where("menu_id = ?", menu.ID).Delete(&btnmod.Button{}).Error
+	err = tx.Where("menu_id = ?", menu.ID).Delete(&menumod.Button{}).Error
 	if err != nil {
 		tx.Rollback()
 		return errors.New("删除原有按钮失败")
@@ -303,7 +302,7 @@ func (menuService *MenuService) GetMenuInfo(id string) (menu menumod.Menu, err e
 	}
 
 	// 获取页面按钮
-	var buttons []btnmod.Button
+	var buttons []menumod.Button
 	err = global.DB.Where("menu_id = ?", menu.ID).Find(&buttons).Error
 	if err != nil {
 		return menu, errors.New("获取页面按钮失败")
@@ -326,7 +325,7 @@ func (menuService *MenuService) GetMenuInfo(id string) (menu menumod.Menu, err e
 		return menumod.Menu{}, errors.New("获取不能操作的按钮失败")
 	}
 
-	var disableButtons []btnmod.Button
+	var disableButtons []menumod.Button
 	if roleButtons != nil {
 		buttonDisableMap := make(map[string]int)
 		for _, button := range roleButtons {
@@ -442,7 +441,7 @@ func (menuService *MenuService) GetMenuTreeMap(menuIds []string) (treeMap map[st
 		err = global.DB.Order("sort").Find(&allMenus).Error
 	}
 
-	var buttons []btnmod.Button
+	var buttons []menumod.Button
 	if len(menuIds) > 0 {
 		err = global.DB.Where("menu_id in ?", menuIds).Find(&buttons).Error
 	} else {

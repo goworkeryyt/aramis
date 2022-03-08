@@ -7,18 +7,14 @@ require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/golang-module/carbon/v2 v2.0.1
 	github.com/gookit/color v1.5.0
-	github.com/jinzhu/copier v0.3.5
-	go.uber.org/zap v1.21.0
-	gorm.io/gorm v1.23.2
-)
-
-require github.com/mojocn/base64Captcha v1.3.5
-
-require (
 	github.com/goworkeryyt/go-config v0.0.0-20220228091301-316c2934c5ba
-	github.com/goworkeryyt/go-core v0.0.0-20220307124847-dff1201cc7b7
+	github.com/goworkeryyt/go-core v0.0.0-20220308064054-897acfa87a59
 	github.com/goworkeryyt/go-middle v0.0.0-20220307121946-9d9c072cf7a5
 	github.com/goworkeryyt/go-toolbox v0.0.0-20220305165309-ddca69d4812c
+	github.com/jinzhu/copier v0.3.5
+	github.com/mojocn/base64Captcha v1.3.5
+	go.uber.org/zap v1.21.0
+	gorm.io/gorm v1.23.2
 )
 
 require (

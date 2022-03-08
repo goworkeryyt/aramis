@@ -7,7 +7,6 @@ package rolesrv
 
 import (
 	"errors"
-	"github.com/goworkeryyt/aramis/server/button/model"
 	"github.com/goworkeryyt/aramis/server/menu/model"
 	"github.com/goworkeryyt/aramis/server/role/model"
 	"github.com/goworkeryyt/go-core/global"
@@ -38,7 +37,7 @@ func (roleMenuService RoleMenuService) RoleMenuBind(roleId string, menuIds []str
 	}
 
 	// 效验按钮是否存在
-	var buttons []btnmod.Button
+	var buttons []menumod.Button
 	err = global.DB.Where("id in ?", buttonIds).Find(&buttons).Error
 	if err != nil {
 		return errors.New("查询按钮异常")

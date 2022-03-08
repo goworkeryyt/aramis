@@ -6,7 +6,6 @@
 package menumod
 
 import (
-	"github.com/goworkeryyt/aramis/server/button/model"
 	"github.com/goworkeryyt/go-toolbox/validator"
 )
 
@@ -71,7 +70,7 @@ type Menu struct {
 	Children          []Menu           `json:"children"                   gorm:"-"`
 
 	/** 按钮列表(创建菜单时用) */
-	Buttons           []btnmod.Button  `json:"buttons"                    gorm:"-"`
+	Buttons           []Button `json:"buttons"                    gorm:"-"`
 
 	/** 按钮ID */
 	ButtonId          string           `json:"buttonId"                   gorm:"-"`
