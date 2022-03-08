@@ -11,6 +11,7 @@ import (
 	"github.com/goworkeryyt/aramis/server/user/api/v1"
 	"github.com/goworkeryyt/aramis/server/user/model"
 	"github.com/goworkeryyt/go-core/global"
+	"github.com/goworkeryyt/go-core/jwt"
 	"github.com/goworkeryyt/go-middle/record/access"
 	"github.com/goworkeryyt/go-middle/record/operate"
 	"go.uber.org/zap"
@@ -21,6 +22,7 @@ func autoCreateTables() {
 	if global.DB != nil {
 		// 数据库自动迁移
 		err := global.DB.AutoMigrate(
+			jwt.CustomClaims{},
 			usermod.User{},
 		)
 		if err != nil && global.LOG != nil {
