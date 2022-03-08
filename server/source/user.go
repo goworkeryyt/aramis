@@ -6,9 +6,9 @@
 package source
 
 import (
-	"aramis/server/user/model"
 	"github.com/golang-module/carbon/v2"
 	"github.com/gookit/color"
+	"github.com/goworkeryyt/aramis/server/user/model"
 	"github.com/goworkeryyt/go-core/global"
 	"github.com/goworkeryyt/go-toolbox/sign"
 	"github.com/goworkeryyt/go-toolbox/uuid"
