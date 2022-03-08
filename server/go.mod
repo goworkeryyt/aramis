@@ -9,7 +9,7 @@ require (
 	github.com/gookit/color v1.5.0
 	github.com/goworkeryyt/go-config v0.0.0-20220228091301-316c2934c5ba
 	github.com/goworkeryyt/go-core v0.0.0-20220308064054-897acfa87a59
-	github.com/goworkeryyt/go-middle v0.0.0-20220307121946-9d9c072cf7a5
+	github.com/goworkeryyt/go-middle v0.0.0-20220308070155-34d176cb08e3
 	github.com/goworkeryyt/go-toolbox v0.0.0-20220305165309-ddca69d4812c
 	github.com/jinzhu/copier v0.3.5
 	github.com/mojocn/base64Captcha v1.3.5
