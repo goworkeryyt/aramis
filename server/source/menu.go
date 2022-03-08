@@ -27,7 +27,6 @@ var menus = []menumod.Menu {
 	{ID: "651515f100e34fbc805fa2d7019bc335", CreateTime: carbon.Now().ToDateTimeString(), MenuName: "商户管理", Sort:1, Url: "merchantList", RouterName: "merchantList", IsShow: 1, FilePath: "views/merchant/merchantList.vue", MenuIcon: "", ParentId: "a38526d5ee464957a88efd808a4a80e9"},
 	{ID: "7f275e4796214dc48066d7714071a50b", CreateTime: carbon.Now().ToDateTimeString(), MenuName: "系统管理", Sort:1, Url: "superAdmin", RouterName: "superAdmin", IsShow: 1, FilePath: "views/superAdmin", MenuIcon: "s-tools", ParentId: ""},
 	{ID: "a38526d5ee464957a88efd808a4a80e9", CreateTime: carbon.Now().ToDateTimeString(), MenuName: "商户信息", Sort:2, Url: "merchant", RouterName: "merchant", IsShow: 1, FilePath: "views/merchant", MenuIcon: "s-goods", ParentId: ""},
-	{ID: "7e2bbef03e744b55899ba4d0ceb73163", CreateTime: carbon.Now().ToDateTimeString(), MenuName: "单位信息", Sort:3, Url: "corp", RouterName: "corp", IsShow: 1, FilePath: "views/corp", MenuIcon: "s-help", ParentId: ""},
 }
 
 // Init
