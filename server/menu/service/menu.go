@@ -456,6 +456,7 @@ func (menuService *MenuService) GetMenuTreeMap(menuIds []string) (treeMap map[st
 			buttonToMenu.ButtonId = button.ID
 			buttonToMenu.ButtonIdentity = button.ButtonIdentity
 			buttonToMenu.ButtonName = button.ButtonName
+			buttonToMenu.IsShow = menumod.HIDE
 			allMenus = append(allMenus, buttonToMenu)
 		}
 	}
