@@ -10,7 +10,7 @@ import { getRequest, postRequest } from '../commen/axios/func.js'
 
 function findApiPage(params) {
   return new Promise((resolve, reject) => {
-    getRequest(authURL + 'apiInfo/findApiPage', params)
+    getRequest(authURL + 'data/findApiPage', params)
       .then(res => {
         resolve(res)
       })
@@ -25,7 +25,7 @@ function findApiPage(params) {
 
 function createApi(params) {
   return new Promise((resolve, reject) => {
-    postRequest(authURL + 'apiInfo/createApi', params)
+    postRequest(authURL + 'data/createApi', params)
       .then(res => {
         resolve(res)
       })
@@ -40,7 +40,7 @@ function createApi(params) {
 
 function deleteApi(params) {
   return new Promise((resolve, reject) => {
-    postRequest(authURL + 'apiInfo/deleteApi', params)
+    postRequest(authURL + 'data/deleteApi', params)
       .then(res => {
         resolve(res)
       })
@@ -55,7 +55,7 @@ function deleteApi(params) {
 
 function updateApi(params) {
   return new Promise((resolve, reject) => {
-    postRequest(authURL + 'apiInfo/updateApi', params)
+    postRequest(authURL + 'data/updateApi', params)
       .then(res => {
         resolve(res)
       })
@@ -70,7 +70,7 @@ function updateApi(params) {
 
 function findApiTree(params) {
   return new Promise((resolve, reject) => {
-    getRequest(authURL + 'apiInfo/findApiTree', params)
+    getRequest(authURL + 'data/findApiTree', params)
       .then(res => {
         resolve(res)
       })
@@ -85,7 +85,7 @@ function findApiTree(params) {
 
 function findRoleApi(params) {
   return new Promise((resolve, reject) => {
-    getRequest(authURL + 'apiInfo/findRoleApi', params)
+    getRequest(authURL + 'data/findRoleApi', params)
       .then(res => {
         resolve(res)
       })
@@ -100,7 +100,7 @@ function findRoleApi(params) {
 
 function roleApiBind(params) {
   return new Promise((resolve, reject) => {
-    postRequest(authURL + 'apiInfo/roleApiBind', params)
+    postRequest(authURL + 'data/roleApiBind', params)
       .then(res => {
         resolve(res)
       })
@@ -115,7 +115,7 @@ function roleApiBind(params) {
 
 function findApis(params) {
   return new Promise((resolve, reject) => {
-    getRequest(authURL + 'apiInfo/findApis', params)
+    getRequest(authURL + 'data/findApis', params)
       .then(res => {
         resolve(res)
       })
