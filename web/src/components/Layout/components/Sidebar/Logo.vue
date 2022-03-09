@@ -26,10 +26,10 @@ export default {
   },
   data() {
     return {
-      title: '苏州小兰卡',
+      title: 'Aramis'
       // logo: 'https://chuangwork.oss-cn-beijing.aliyuncs.com/2f0dbbcddea948bfb12fa97ddf722448_logo_1.png',
-      // logo: require('@/images/logo-ck.png')
-      logo: ''
+      // logo: require('@/images/aramis120_120.png')
+      // logo: ''
     }
   },
   mounted() {
