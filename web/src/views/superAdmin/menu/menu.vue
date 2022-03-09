@@ -48,10 +48,10 @@
           align="left"
           label="是否显示"
           min-width="100"
-          prop="IsShow"
+          prop="isShow"
         >
           <template #default="scope">
-            <span>{{ scope.row.IsShow === -1 ? "隐藏" : "显示" }}</span>
+            <span>{{ scope.row.isShow === -1 ? "隐藏" : "显示" }}</span>
           </template>
         </el-table-column>
         <el-table-column min-width="300" prop="funName" label="功能（按钮）">

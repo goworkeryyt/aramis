@@ -63,7 +63,7 @@ export default {
         this.apiIds.push(item.id)
       })
       const params = {
-        roleID: this.roleId,
+        roleId: this.roleId,
         apiIds: this.apiIds
       }
       this.roleApiBind(params)

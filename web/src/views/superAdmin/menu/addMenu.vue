@@ -45,8 +45,8 @@
             placeholder="唯一英文字符串"
           />
         </el-form-item>
-        <el-form-item prop="IsShow" label="是否展示" style="width: 30%">
-          <el-select v-model="form.IsShow" placeholder="是否在列表展示">
+        <el-form-item prop="isShow" label="是否展示" style="width: 30%">
+          <el-select v-model="form.isShow" placeholder="是否在列表展示">
             <el-option :value="-1" label="否" />
             <el-option :value="1" label="是" />
           </el-select>
@@ -232,7 +232,7 @@ export default {
       form: {
         url: '',
         routerName: '',
-        IsShow: 1,
+        isShow: 1,
         parentId: '',
         filePath: '',
         menuName: '',
@@ -379,7 +379,7 @@ export default {
       this.form = {
         url: '',
         routerName: '',
-        IsShow: 1,
+        isShow: 1,
         ParentId: '',
         filePath: '',
         menuName: '',

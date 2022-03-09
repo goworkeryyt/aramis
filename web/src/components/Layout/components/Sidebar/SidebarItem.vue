@@ -3,7 +3,7 @@
   <div class="menu-wrapper">
     <template v-for="item in routes">
       <el-submenu
-        v-if="item.IsShow === 1"
+        v-if="item.isShow === 1"
         :key="item.url"
         :index="'/' + item.url"
       >
@@ -30,7 +30,7 @@
           </sidebar-item> -->
           <router-link :key="child.url" :to="'/' + item.url + '/' + child.url">
             <el-menu-item
-              v-if="child.IsShow === 1"
+              v-if="child.isShow === 1"
               mode="vertical"
               :index="'/' + item.url + '/' + child.url"
               collapse="true"

@@ -148,7 +148,7 @@ export default {
       if (code !== '0') {
         this.$message({
           type: 'warning',
-          message,
+          message: res.data.message,
           center: true
         })
         this.getCaptcha()
@@ -170,11 +170,6 @@ export default {
         this.getAllMerchants()
       } else if (content.user.userType == 'MERT') {
         sessionStorage.setItem('merchantNo', content.user.merchantNo)
-        this.getCorpList(content.user.merchantNo)
-      } else if (content.user.userType == 'CORP') {
-        sessionStorage.setItem('merchantNo', content.user.merchantNo)
-        sessionStorage.setItem('corpNo', content.user.corpNo)
-        this.getLineList(content.user.merchantNo, content.user.corpNo)
       }
     },
     // 获取所有商户列表（不分页）
@@ -186,36 +181,7 @@ export default {
         this.$message({
           type: 'warning',
           center: true,
-          message
-        })
-      }
-    },
-    // 根据商户获取所有运营单位列表
-    async getCorpList(merchantNo) {
-      const res = await this.Api.findAllCorps({ merchantNo: merchantNo })
-      if (res.data.code === '0') {
-        sessionStorage.setItem('corpListData', JSON.stringify(res.data.content))
-      } else {
-        this.$message({
-          type: 'warning',
-          center: true,
-          message
-        })
-      }
-    },
-    // 根据商户和运营单位获取线路编号列表
-    async getLineList(merchantNo, corpId) {
-      const res = await this.Api.findAllLines({
-        merchantNo: merchantNo,
-        corpId: corpId
-      })
-      if (res.data.code === '0') {
-        sessionStorage.setItem('lineListData', JSON.stringify(res.data.content))
-      } else {
-        this.$message({
-          type: 'warning',
-          center: true,
-          message
+          message: res.data.message
         })
       }
     }
